@@ -2,16 +2,16 @@
 require 'spec_helper'
 
 describe Smartgen do
-  describe "generators" do
-    it "should create a generator the first time it is accessed" do
-      Smartgen[:foo].should be_an_instance_of(Smartgen::Generator)
+  describe "resources" do
+    it "should create a resource the first time it is accessed" do
+      Smartgen[:foo].should be_an_instance_of(Smartgen::Resource)
     end
     
-    it "should use the same generator when it is accessed in the future" do
+    it "should use the same resource when it is accessed in the future" do
       Smartgen[:foo].should be_equal(Smartgen[:foo])
     end
     
-    it "should create different generator for each given name" do
+    it "should create different resource for each given name" do
       Smartgen[:foo].should_not be_equal(Smartgen[:bar])
     end
   end
