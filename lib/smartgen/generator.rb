@@ -15,14 +15,14 @@ module Smartgen
     
     def generate_files
       markup_files.each do |markup_file|
-        create_file output_folder_path("#{markup_file.filename}.html"), generate_file(markup_file)
+        create_file output_folder_path("#{markup_file.filename}.html"), process_file(markup_file)
       end
     end
     
     private
     
-      def generate_file(markup_file)
-        
+      def process_file(markup_file)
+        markup_file.contents
       end
     
       def markup_files

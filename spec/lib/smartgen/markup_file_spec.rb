@@ -2,7 +2,11 @@ require 'spec_helper'
 
 describe Smartgen::MarkupFile do
   def path
-    fixture('src/index.textile')
+    fixture('src/common/index.textile')
+  end
+  
+  def expectation_path
+    fixture('expectations/common/index.html')
   end
   
   subject { Smartgen::MarkupFile.new path }
@@ -20,36 +24,40 @@ describe Smartgen::MarkupFile do
   end
   
   it "should use textile as markup engine" do
-    subject.engine.should == :textile
+    subject.engine.should be_an_instance_of(Smartgen::Engine::Textile)
   end
   
   it "should use textile as markup engine for files without extension" do
     def path
-      fixture('src/somefile')
+      fixture('src/common/somefile')
     end
 
-    subject.engine.should == :textile
+    subject.engine.should be_an_instance_of(Smartgen::Engine::Textile)
+  end
+
+  it "should returns its raw contents" do
+    subject.raw_contents.should == File.read(path)
+  end
+
+  it "should return its contents" do
+    subject.contents.should == File.read(expectation_path)
   end
   
   context "using markdown template" do
     it "should use textile as markup engine for files with .markdown" do
       def path
-        fixture('src/other_index.markdown')
+        fixture('src/common/other_index.markdown')
       end
       
-      subject.engine.should == :markdown
+      subject.engine.should be_an_instance_of(Smartgen::Engine::Markdown)
     end
     
     it "should use textile as markup engine for files with .md" do
       def path
-        fixture('src/other_index.md')
+        fixture('src/common/other_index.md')
       end
       
-      subject.engine.should == :markdown
+      subject.engine.should be_an_instance_of(Smartgen::Engine::Markdown)
     end
-  end
-  
-  it "should returns its raw contents" do
-    subject.raw_contents.should == File.read(path)
   end
 end

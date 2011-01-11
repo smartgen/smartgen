@@ -2,6 +2,7 @@
 require File.expand_path(File.join('smartgen', 'resource'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'configuration'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'markup_file'), File.dirname(__FILE__))
+require File.expand_path(File.join('smartgen', 'engines'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'generator'), File.dirname(__FILE__))
 
 module Smartgen
