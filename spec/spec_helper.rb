@@ -11,8 +11,27 @@ RSpec.configure do |config|
   def fixtures_dir
     File.expand_path('fixtures', File.dirname(__FILE__))
   end
+
+  def sandbox(path)
+    File.join(sandbox_dir, path)
+  end
   
   def sandbox_dir
     File.expand_path('sandbox', File.dirname(__FILE__))
   end
+  
+  def capture(stream)
+    begin
+      stream = stream.to_s
+      eval "$#{stream} = StringIO.new"
+      yield
+      result = eval("$#{stream}").string
+    ensure
+      eval("$#{stream} = #{stream.upcase}")
+    end
+
+    result
+  end
+  
+  alias silence capture
 end
