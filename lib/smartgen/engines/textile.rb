@@ -6,6 +6,10 @@ module Smartgen
       def process(body)
         RedCloth.new(body).to_html
       end
+      
+      def supported?(extension)
+        ['.textile'].include?(extension)
+      end
     end
   end
 end

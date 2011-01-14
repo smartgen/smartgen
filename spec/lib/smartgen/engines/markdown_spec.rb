@@ -12,4 +12,12 @@ describe Smartgen::Engine::Markdown do
   it "should process body using BlueCloth" do
     subject.process(body).should == contents
   end
+  
+  it "should support .md extension" do
+    subject.should be_supported('.md')
+  end
+  
+  it "should support .markdown extension" do
+    subject.should be_supported('.markdown')
+  end
 end

@@ -12,4 +12,8 @@ describe Smartgen::Engine::Textile do
   it "should process body using RedCloth" do
     subject.process(body).should == contents
   end
+  
+  it "should support .textile extension" do
+    subject.should be_supported('.textile')
+  end
 end

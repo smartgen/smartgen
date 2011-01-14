@@ -1,5 +1,6 @@
 require "active_support/i18n"
 require "active_support/inflector"
+require "active_support/core_ext"
 
 module Smartgen
   class MarkupFile
@@ -9,7 +10,7 @@ module Smartgen
       @path = path
       @extension = File.extname(path)
       @filename = File.basename(path, @extension)
-      @engine = engine_for(@extension) || create_engine(:textile)
+      @engine = engine_for(@extension) || self.class.engines.first
     end
     
     def raw_contents
@@ -20,18 +21,28 @@ module Smartgen
       engine.process(raw_contents)
     end
     
+    class << self
+      def engines
+        if @engines.blank?
+          @engines = [Smartgen::Engine::Textile.new, Smartgen::Engine::Markdown.new]
+        end
+        
+        @engines
+      end
+      
+      def register(engine)
+        engines.unshift engine.new
+      end
+    end
+    
     private
     
-      def engine_for(ext)
-        Smartgen::MARKUP_ENGINES_MAPPING.each do |engine, extensions|
-          return create_engine(engine) if extensions.include?(ext)
+      def engine_for(extension)
+        self.class.engines.each do |engine|
+          return engine if engine.supported?(extension)
         end
         
         nil
-      end
-      
-      def create_engine(engine)
-        "smartgen/engine/#{engine}".camelize.constantize.new
       end
   end
 end
