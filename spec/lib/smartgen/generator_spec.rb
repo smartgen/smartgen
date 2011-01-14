@@ -35,7 +35,7 @@ describe Smartgen::Generator do
   end
   
   def options
-    { :metadata_file => fixture('src/metadata.yml'), :layout => fixture('src/layout.html.erb'), :assets => [fixture('src/assets/**/*')] }
+    {}
   end
   
   subject { Smartgen::Generator.new arguments, options, { :verbose => false } }
@@ -60,8 +60,40 @@ describe Smartgen::Generator do
     it "should convert markup files into HTML files when generating" do
       capture(:stdout) { subject.invoke_all }
       actual_src_filenames.each do |src_filename, src_ext|
-        read_output("#{src_filename}.html").should include(read_fixture("expectations/common/#{src_filename}.html"))
+        read_output("#{src_filename}.html").should == read_fixture("expectations/common/#{src_filename}.html")
       end
+    end
+    
+    describe "with layout" do
+      def src_files
+        [fixture('src/with_layout/index.textile')]
+      end
+      
+      def options
+        { :layout => fixture('src/layout.html.erb') }
+      end
+      
+      it "should use the layout when generating" do
+        capture(:stdout) { subject.invoke_all }
+        read_output("index.html").should == read_fixture("expectations/with_layout/index.html")
+      end
+    end
+  end
+  
+  describe "renderer registration" do
+    it "should register ERB renderer by default" do
+      Smartgen::Generator.renderer.should be_an_instance_of(Smartgen::Renderer::ERB)
+    end
+    
+    it "should allow the registration of a custom renderer" do
+      class MyRenderer
+        def render(layout, markup_file)
+          "do some rendering stuff"
+        end
+      end
+      
+      Smartgen::Generator.renderer = MyRenderer.new
+      Smartgen::Generator.renderer.render('some_layout', mock(Smartgen::MarkupFile)).should == "do some rendering stuff"
     end
   end
 end

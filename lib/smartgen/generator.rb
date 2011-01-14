@@ -7,6 +7,8 @@ module Smartgen
     argument :src_files, :type => :array
     argument :output_folder, :type => :string
     
+    class_option :layout
+    
     attr_reader :loaded_files
     
     def create_output_folder
@@ -19,10 +21,32 @@ module Smartgen
       end
     end
     
+    class << self
+      def renderer
+        @renderer ||= Smartgen::Renderer::ERB.new
+      end
+      
+      def renderer=(value)
+        @renderer = value
+      end
+    end
+    
     private
     
       def process_file(markup_file)
-        markup_file.contents
+        if has_layout?
+          self.class.renderer.render(layout, markup_file)
+        else
+          markup_file.contents
+        end
+      end
+      
+      def has_layout?
+        options.has_key?("layout")
+      end
+      
+      def layout
+        File.read(options["layout"])
       end
     
       def markup_files
