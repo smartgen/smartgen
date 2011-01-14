@@ -13,6 +13,10 @@ describe Smartgen::Engine::Textile do
     subject.process(body).should == contents
   end
   
+  it "should return .textile as its extensions" do
+    subject.extensions.should == ['.textile']
+  end
+  
   it "should support .textile extension" do
     subject.should be_supported('.textile')
   end

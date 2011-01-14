@@ -8,7 +8,11 @@ module Smartgen
       end
       
       def supported?(extension)
-        ['.md', '.markdown'].include?(extension)
+        extensions.include?(extension)
+      end
+      
+      def extensions
+        @extensions ||= ['.md', '.markdown']
       end
     end
   end

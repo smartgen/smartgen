@@ -8,7 +8,11 @@ module Smartgen
       end
       
       def supported?(extension)
-        ['.textile'].include?(extension)
+        extensions.include?(extension)
+      end
+      
+      def extensions
+        @extensions ||= ['.textile']
       end
     end
   end

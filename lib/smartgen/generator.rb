@@ -26,13 +26,13 @@ module Smartgen
       end
     
       def markup_files
-        Dir[*src_files].select { |f| markup_extensions.include?(File.extname(f)) }.map do |markup_filename|
+        Dir[*src_files].select { |f| supported?(File.extname(f)) }.map do |markup_filename|
           MarkupFile.new markup_filename
         end
       end
       
-      def markup_extensions
-        Smartgen::MARKUP_ENGINES_MAPPING.map { |m, exts| exts }.flatten
+      def supported?(extension)
+        MarkupFile.engines.one? { |engine| engine.supported?(extension) }
       end
       
       def output_folder_path(path)
