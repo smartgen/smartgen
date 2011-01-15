@@ -18,10 +18,10 @@ describe Smartgen::Engine::Markdown do
   end
   
   it "should support .md extension" do
-    subject.should be_supported('.md')
+    should be_supported('.md')
   end
   
   it "should support .markdown extension" do
-    subject.should be_supported('.markdown')
+    should be_supported('.markdown')
   end
 end

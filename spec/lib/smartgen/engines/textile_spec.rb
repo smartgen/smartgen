@@ -18,6 +18,6 @@ describe Smartgen::Engine::Textile do
   end
   
   it "should support .textile extension" do
-    subject.should be_supported('.textile')
+    should be_supported('.textile')
   end
 end
