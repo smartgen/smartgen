@@ -1,9 +1,13 @@
 require 'spec_helper'
 
 describe Smartgen::Configuration do
+  matcher :be_an_empty_array do |expected|
+    match { |actual| actual.instance_of?(Array) && actual.empty? }
+  end
+  
   describe "defaults" do
     it "should initialize src_files to an empty array" do
-      subject.src_files.should be_an_instance_of(Array)
+      subject.src_files.should be_an_empty_array
       subject.src_files.should be_empty
     end
     
@@ -16,8 +20,7 @@ describe Smartgen::Configuration do
     end
     
     it "should initialize assets to an empty array" do
-      subject.assets.should be_an_instance_of(Array)
-      subject.assets.should be_empty
+      subject.assets.should be_an_empty_array
     end
     
     it "should initialize metadata_file to 'metadata.yml'" do
