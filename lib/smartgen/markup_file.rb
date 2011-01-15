@@ -1,4 +1,3 @@
-require "active_support/i18n"
 require "active_support/inflector"
 require 'active_support/core_ext/object/blank'
 
