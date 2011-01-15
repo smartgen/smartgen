@@ -1,4 +1,5 @@
 # -*- encoding: utf-8 -*-
+require File.expand_path(File.join('smartgen', 'object_hash'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'resource'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'configuration'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'markup_file'), File.dirname(__FILE__))
