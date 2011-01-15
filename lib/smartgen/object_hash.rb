@@ -1,4 +1,4 @@
-require 'active_support/core_ext/hash/indifferent_access'
+require 'active_support/core_ext/hash'
 
 module Smartgen
   class ObjectHash < HashWithIndifferentAccess
@@ -33,8 +33,6 @@ module Smartgen
 end
 
 class Hash
-  include ActiveSupport::CoreExtensions::Hash::IndifferentAccess
-  
   def with_object_hash
     hash = Smartgen::ObjectHash.new(self)
     hash.default = self.default
