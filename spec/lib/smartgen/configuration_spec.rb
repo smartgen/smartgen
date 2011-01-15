@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Smartgen::Configuration do
-  matcher :be_an_empty_array do |expected|
+  matcher :be_an_empty_array do
     match { |actual| actual.instance_of?(Array) && actual.empty? }
   end
   
