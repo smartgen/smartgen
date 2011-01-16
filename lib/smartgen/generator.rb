@@ -7,17 +7,26 @@ module Smartgen
     argument :src_files, :type => :array
     argument :output_folder, :type => :string
     
-    class_option :layout
+    class_option :layout, :type => :string
+    class_option :assets, :type => :array, :default => []
     
     attr_reader :loaded_files
     
     def create_output_folder
+      destination_root = output_folder
       empty_directory output_folder
     end
     
     def generate_files
       markup_files.each do |markup_file|
         create_file output_folder_path("#{markup_file.filename}.html"), process_file(markup_file), :force => true
+      end
+    end
+    
+    def copy_assets
+      options[:assets].each do |dir|
+        self.class.source_root File.dirname(dir)
+        directory File.basename(dir), output_folder_path(File.basename(dir)), :force => true
       end
     end
     

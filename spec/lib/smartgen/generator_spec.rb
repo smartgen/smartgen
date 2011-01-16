@@ -52,6 +52,7 @@ describe Smartgen::Generator do
     
     it "should create HTML files for each markup template in src_files" do
       capture(:stdout) { subject.invoke_all }
+      
       actual_src_filenames.each do |src_filename, src_ext|
         File.should be_file(output_folder_file("#{src_filename}.html"))
       end
@@ -83,6 +84,39 @@ describe Smartgen::Generator do
       it "should use the layout when generating" do
         capture(:stdout) { subject.invoke_all }
         read_output("index.html").should == read_fixture("expectations/with_layout/index.html")
+      end
+    end
+    
+    describe "assets" do
+      def assets
+        [fixture("src/assets/images"), fixture("src/assets/javascripts"), fixture("src/assets/stylesheets")]
+      end
+      
+      def options
+        { :assets => assets }
+      end
+      
+      it "should copy directories to output folder" do
+        capture(:stdout) { subject.invoke_all }
+
+        File.should be_directory(output_folder_file('images'))
+        File.should be_directory(output_folder_file('javascripts'))
+      end
+      
+      it "should copy the contents of the given directories to output folder" do
+        capture(:stdout) { subject.invoke_all }
+
+        File.should be_file(output_folder_file('images/image.gif'))
+        File.should be_file(output_folder_file('javascripts/somelib.js'))
+        File.should be_file(output_folder_file('stylesheets/style.css'))
+      end
+
+      it "should force copy of the contents of the given directories to output folder" do
+        FileUtils.mkdir_p(output_folder_file('javascripts'))
+        File.open(output_folder_file('javascripts/somelib.js'), 'w') { |f| f.write('//some code') }
+
+        capture(:stdout) { subject.invoke_all }
+        read_output('javascripts/somelib.js').should == read_fixture('src/assets/javascripts/somelib.js')
       end
     end
   end
