@@ -64,6 +64,13 @@ describe Smartgen::Generator do
       end
     end
     
+    it "should always force generation of each file, even if it exists" do
+      FileUtils.mkdir_p(output_folder)
+      File.open(output_folder_file("index.html"), 'w') { |f| f.write('old contents') }
+      capture(:stdout) { subject.invoke_all }
+      read_output("index.html").should == read_fixture("expectations/common/index.html")
+    end
+    
     describe "with layout" do
       def src_files
         [fixture('src/with_layout/index.textile')]

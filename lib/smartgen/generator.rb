@@ -17,7 +17,7 @@ module Smartgen
     
     def generate_files
       markup_files.each do |markup_file|
-        create_file output_folder_path("#{markup_file.filename}.html"), process_file(markup_file)
+        create_file output_folder_path("#{markup_file.filename}.html"), process_file(markup_file), :force => true
       end
     end
     
