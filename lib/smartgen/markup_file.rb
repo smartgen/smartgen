@@ -3,7 +3,7 @@ require 'active_support/core_ext/object/blank'
 
 module Smartgen
   class MarkupFile
-    attr_accessor :path, :filename, :extension, :file, :engine
+    attr_accessor :path, :filename, :extension, :engine
     
     def initialize(path)
       @path = path
