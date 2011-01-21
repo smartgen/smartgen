@@ -1,0 +1,43 @@
+title: Common title
+pages:
+  - &index
+    file: index_with_specific_metadata
+    title: Index Page
+    description: Description for index page
+    link: http://index.com
+menu:
+  - {
+    category: Common pages,
+    pages:
+      [{
+        title: Some page,
+        description: Some description of page,
+        link: http://link.com
+      },
+      *index,
+      {
+        title: Some other page,
+        description: Some description of other page,
+        link: http://other_link.com
+      },
+      {
+        title: Another page,
+        description: Some description of another page,
+        link: http://another_link.com
+      }]
+  }
+  - {
+    category: Sample pages,
+    pages:
+      [{
+        title: Sample page,
+        description: Some description of sample page,
+        link: http://sample.com
+      },
+      {
+        title: Some sample page,
+        description: Some description of some sample page,
+        link: http://sample_link.com
+      }]
+  }
+  

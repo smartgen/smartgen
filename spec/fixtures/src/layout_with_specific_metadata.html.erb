@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title><%= metadata.current_page.title %> :: <%= metadata.title %></title>
+  <meta name="description" content="<%= metadata.current_page.description %>"/>
+</head>
+<body>
+  <section id="menu">
+    <dl>
+      <% metadata.menu.each do |entry| %>
+        <dt><%= entry.category %></dt>
+        <% entry.pages.each do |page| %>
+          <dd><a href="<%= page.link %>" title="<%= page.description %>"><%= page.title %></a></dd>
+        <% end %>
+        <% unless metadata.menu.last == entry %><hr/><% end %>
+      <% end %>
+    </dl>
+  </section>
+
+  <section id="contents">
+    <%= markup_file.contents %>
+  </section>
+</body>
+</html>

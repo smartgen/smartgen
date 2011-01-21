@@ -85,6 +85,32 @@ describe Smartgen::Generator do
         capture(:stdout) { subject.invoke_all }
         read_output("index.html").should == read_fixture("expectations/with_layout/index.html")
       end
+      
+      describe "and metadata" do
+        def options
+          { :layout => fixture('src/layout_with_metadata.html.erb'), :metadata_file => fixture('src/metadata.yml') }
+        end
+        
+        it "should load metadata from file and expose it when rendering files" do
+          capture(:stdout) { subject.invoke_all }
+          read_output("index.html").should == read_fixture("expectations/with_layout/index_with_metadata.html")
+        end
+        
+        describe "using conventions" do
+          def src_files
+            [fixture('src/with_layout/index_with_specific_metadata.textile')]
+          end
+
+          def options
+            { :layout => fixture('src/layout_with_specific_metadata.html.erb'), :metadata_file => fixture('src/metadata.yml') }
+          end
+          
+          it "should expose metadata for current page data for each file in metadata.current_page" do
+            capture(:stdout) { subject.invoke_all }
+            read_output("index_with_specific_metadata.html").should == read_fixture("expectations/with_layout/index_with_specific_metadata.html")
+          end
+        end
+      end
     end
     
     describe "assets" do

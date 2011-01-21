@@ -9,6 +9,7 @@ module Smartgen
     
     class_option :layout, :type => :string
     class_option :assets, :type => :array, :default => []
+    class_option :metadata_file, :type => :string
     
     attr_reader :loaded_files
     
@@ -44,7 +45,7 @@ module Smartgen
     
       def process_file(markup_file)
         if has_layout?
-          self.class.renderer.render(layout, markup_file)
+          self.class.renderer.render(layout, markup_file, metadata_for(markup_file))
         else
           markup_file.contents
         end
@@ -57,7 +58,35 @@ module Smartgen
       def layout
         File.read(options["layout"])
       end
+      
+      def metadata_for(markup_file)
+        metadata = load_metadata
+        add_current_page_data_to(metadata, markup_file)
+        metadata
+      end
+      
+      def load_metadata
+        if options["metadata_file"]
+          YAML.load(File.read(options["metadata_file"]))
+        else
+          {}
+        end
+      end
+      
+      def add_current_page_data_to(metadata, markup_file)
+        if metadata.has_key?("pages")
+          metadata["current_page"] = page_metadata(metadata, markup_file) || {}
+        end
+      end
+      
+      def page_metadata(metadata, markup_file)
+        metadata["pages"].select { |page| current_page?(page, markup_file) }.first
+      end
     
+      def current_page?(page, markup_file)
+        page.has_key?("file") && page["file"] == markup_file.filename
+      end
+      
       def markup_files
         Dir[*src_files].select { |f| supported?(File.extname(f)) }.map do |markup_filename|
           MarkupFile.new markup_filename
