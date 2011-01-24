@@ -24,32 +24,23 @@ describe Smartgen::MarkupFile do
       Smartgen::MarkupFile.engines.one? { |engine| engine.instance_of?(Smartgen::Engine::Markdown) }.should be_true, "Markdown was not registered as engine"
     end
     
-    it "should register an engine" do
-      class MyEngine
-        def process(body)
+    class MyEngine < Smartgen::Engine::Base
+      protected
+        def parse(body)
           "some processing"
         end
         
-        def support?(extension)
+        def extensions
           ['.something', '.otherext']
         end
-      end
-      
+    end
+    
+    it "should register an engine" do
       Smartgen::MarkupFile.register(MyEngine)
       Smartgen::MarkupFile.engines.one? { |engine| engine.instance_of?(MyEngine) }.should be_true, "MyEngine was not registered as engine"
     end
     
     it "should register the engine with high priority" do
-      class MyEngine
-        def process(body)
-          "some processing"
-        end
-        
-        def support?(extension)
-          ['.something', '.otherext']
-        end
-      end
-
       Smartgen::MarkupFile.register(MyEngine)
       Smartgen::MarkupFile.engines.first.should be_an_instance_of(MyEngine)
     end

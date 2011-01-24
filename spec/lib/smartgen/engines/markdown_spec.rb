@@ -13,10 +13,6 @@ describe Smartgen::Engine::Markdown do
     subject.process(body).should == contents
   end
   
-  it "should return .md and .markdown as its extensions" do
-    subject.extensions.should == ['.md', '.markdown']
-  end
-  
   it "should support .md extension" do
     should be_supported('.md')
   end
