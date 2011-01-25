@@ -11,8 +11,6 @@ module Smartgen
     class_option :assets, :type => :array, :default => []
     class_option :metadata_file, :type => :string
     
-    attr_reader :loaded_files
-    
     def create_output_folder
       destination_root = output_folder
       empty_directory output_folder
