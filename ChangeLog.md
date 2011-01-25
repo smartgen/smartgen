@@ -1,3 +1,8 @@
+New version
+-----------
+
+* Fixed README to explain that only directories may be specified in assets config
+
 0.1.2
 -----
 

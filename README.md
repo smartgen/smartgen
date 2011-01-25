@@ -88,15 +88,15 @@ As you can see, there is a special metadata method called `current_page`. This i
 
 ## Copying assets
 
-When you generate documentation with Smartgen you'll often need to also copy stylesheets, javascript files and images to the output folder. You can easily do so by specifying an array of assets when configuring:
+When you generate documentation with Smartgen you'll often need to also copy stylesheets, javascript files and images to the output folder. You can easily do so by specifying an array of dirs to copy when configuring:
 
     Smartgen[:my_doc].configure do |config|
       config.src_files = ['doc/**/*']
       config.output_folder = 'public/docs'
-      config.assets = ['doc/stylesheets/*.css', 'doc/javascripts/*.js', 'doc/images/*.{png|jpg|gif}']
+      config.assets = ['doc/stylesheets', 'doc/javascripts', 'doc/images']
     end
 
-As you can see you can pass an array of `Dir.glob` to either assets or src_files configuration.
+Only directories may be specified. Smartgen will copy the contents of each directory to the output folder, preserving the directory itself. So `doc/stylesheets` will be copied to `public/docs/stylesheets` for example.
 
 ## Using different configurations
 
