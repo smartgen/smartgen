@@ -26,5 +26,9 @@ describe Smartgen::Configuration do
     it "should initialize metadata_file to nil" do
       subject.metadata_file.should be_nil
     end
+    
+    it "should initialize use_indexer to false" do
+      subject.use_indexer.should be_false
+    end
   end
 end

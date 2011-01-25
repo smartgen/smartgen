@@ -125,4 +125,24 @@ describe Smartgen::MarkupFile do
       end
     end
   end
+  
+  describe "indexer" do
+    subject { Smartgen::MarkupFile.new path, :indexer => true }
+    
+    it "should be accessible when using indexer" do
+      subject.indexer.should be_an_instance_of(Smartgen::Indexer)
+    end
+    
+    it "should use indexer" do
+      mock_indexer = mock(Smartgen::Indexer, :result => 'result')
+      Smartgen::Indexer.should_receive(:new).and_return(mock_indexer)
+      subject
+    end
+    
+    it "should return indexer result as contents" do
+      mock_indexer = mock(Smartgen::Indexer, :result => 'result')
+      Smartgen::Indexer.should_receive(:new).and_return(mock_indexer)
+      subject.contents.should == 'result'
+    end
+  end
 end

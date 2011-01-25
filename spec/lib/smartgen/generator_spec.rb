@@ -158,6 +158,24 @@ describe Smartgen::Generator do
         read_output('javascripts/somelib.js').should == read_fixture('src/assets/javascripts/somelib.js')
       end
     end
+    
+    describe "with indexer" do
+      def src_files
+        [fixture('src/indexer/index_without_ids.textile')]
+      end
+      
+      def options
+        { :use_indexer => true }
+      end
+      
+      it "should add IDs to each <h> tag" do
+        capture(:stdout) { subject.invoke_all }
+
+        actual_src_filenames.each do |src_filename, src_ext|
+          read_output("#{src_filename}.html").should == read_fixture("expectations/indexer/#{src_filename}.html")
+        end
+      end
+    end
   end
   
   describe "renderer registration" do

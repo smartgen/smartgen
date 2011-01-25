@@ -5,6 +5,7 @@ module Smartgen
     attr_accessor :layout
     attr_accessor :assets
     attr_accessor :metadata_file
+    attr_accessor :use_indexer
     
     def initialize
       @src_files = []
@@ -12,6 +13,7 @@ module Smartgen
       @layout = nil
       @assets = []
       @metadata_file = nil
+      @use_indexer = false
     end
   end
 end

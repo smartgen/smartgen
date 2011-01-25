@@ -1,0 +1,26 @@
+h1. Here is some header
+
+And here is a paragraph
+
+* some bullet lists with *style*
+* some bullet lists with _style_
+
+h2. Another header
+
+With some text
+
+h3. Another minor header
+
+With some other text
+
+h4. Yet another smaller header
+
+Again some text
+
+h3. A minor header
+
+Something
+
+h2. A header
+
+With something

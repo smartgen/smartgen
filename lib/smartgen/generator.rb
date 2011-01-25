@@ -10,6 +10,7 @@ module Smartgen
     class_option :layout, :type => :string
     class_option :assets, :type => :array, :default => []
     class_option :metadata_file, :type => :string
+    class_option :use_indexer, :type => :boolean, :default => false
     
     def create_output_folder
       destination_root = output_folder
@@ -87,8 +88,12 @@ module Smartgen
       
       def markup_files
         Dir[*src_files].select { |f| supported?(File.extname(f)) }.map do |markup_filename|
-          MarkupFile.new markup_filename
+          MarkupFile.new markup_filename, markup_file_options
         end
+      end
+      
+      def markup_file_options
+        { :indexer => options[:use_indexer] }
       end
       
       def supported?(extension)
