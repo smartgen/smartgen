@@ -1,3 +1,8 @@
+0.1.2
+-----
+
+* Removing unnecessary require of try from activesupport
+
 0.1.1
 -----
 
