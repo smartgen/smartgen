@@ -1,15 +1,15 @@
 Smartgen
 ========
 
-Smartgen generates static HTML files from markup files, using textile or markdown, and ERB to create layout templates.
+Smartgen generates static HTML files from markup files, using textile or markdown and ERB to create layout templates.
 
 ## Basic Usage
 
-To use you must first add the gem to your Gemfile:
+To use it, you must first add the gem to your Gemfile:
 
     gem 'smartgen'
 
-Then you can create a resource configuration:
+Then, create a resource configuration:
 
     Smartgen[:my_doc].configure do |config|
       config.src_files = ['doc/**/*']
@@ -22,7 +22,7 @@ Finally you generate it:
 
 ## Adding a layout
 
-By default Smartgen will only parse your textile (*.textile) or markdown (*.md or *.markdown) files, based on their extension and output it. You can give a layout file that will be used when rendering each file:
+By default Smartgen will only parse your textile (*.textile) or markdown (*.md or *.markdown) files, based on their extension and output it. You can setup a layout file that will be used when rendering each file:
 
     Smartgen[:my_doc].configure do |config|
       config.src_files = ['doc/**/*']
@@ -63,7 +63,7 @@ This would be `doc/metadata.yml` contents
         description: Description for some page
     menu: [*index, *some_page]
 
-And this could be a layout that makes use of these metadata:
+And this could be a layout that makes use of the metadata above:
 
     <html>
     <head>
@@ -96,11 +96,11 @@ When you generate documentation with Smartgen you'll often need to also copy sty
       config.assets = ['doc/stylesheets/*.css', 'doc/javascripts/*.js', 'doc/images/*.{png|jpg|gif}']
     end
 
-As you can see you can pass an array of `Dir.glob` to either assets or src_files configuration.
+As you can see, you can pass an array of `Dir.glob` to either assets or src_files configuration.
 
 ## Using different configurations
 
-You may create as many resource configurations as you want. You create a configuration the first time you call `Smartgen[:some_config_name]`, and then, whenever you use it again it will return that configuration. You can change the configuration by calling `configure`:
+You may create as many resource configurations as you want. When you call `Smartgen[:some_config_name]`, Smartgen creates a configuration with name `:some_config_name` and then, whenever you use it again, Smartgen returns that configuration. You can even change the configuration by calling `configure`:
 
     Smartgen[:doc].configure do |config|
       config.src_files = ['doc/**/*']
