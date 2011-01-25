@@ -117,3 +117,16 @@ You may create as many resource configurations as you want. You create a configu
 
     Smartgen[:doc].generate!
     Smartgen[:some_other_documentation].generate!
+
+## Rake Task
+
+You may also use a rake task:
+
+    require 'smartgen/rake_task'
+    
+    Smartgen::RakeTask.new :my_doc do |config|
+      config.src_files = ['doc/**/*']
+      config.output_folder = 'public/docs'
+    end
+
+The yielded config is exactly the same config yielded by Smartgen::Resource#configure method, so you can use any of the above configs.
