@@ -72,6 +72,19 @@ describe Smartgen::Generator do
       read_output("index.html").should == read_fixture("expectations/common/index.html")
     end
     
+    context "with nil layout" do
+      def options
+        { :layout => nil }
+      end
+    
+      it "should not use layout" do
+        capture(:stdout) { subject.invoke_all }
+        actual_src_filenames.each do |src_filename, src_ext|
+          read_output("#{src_filename}.html").should == read_fixture("expectations/common/#{src_filename}.html")
+        end
+      end
+    end
+    
     describe "with layout" do
       def src_files
         [fixture('src/with_layout/index.textile')]

@@ -52,7 +52,7 @@ module Smartgen
       end
       
       def has_layout?
-        options.has_key?("layout")
+        options["layout"].present?
       end
       
       def layout
