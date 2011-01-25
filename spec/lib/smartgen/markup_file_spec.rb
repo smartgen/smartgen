@@ -118,7 +118,7 @@ describe Smartgen::MarkupFile do
 
       it "should use textile as markup engine for files with .md" do
         def path
-          fixture('src/common/other_index.md')
+          fixture('src/common/another_index.md')
         end
 
         subject.engine.should be_an_instance_of(Smartgen::Engine::Markdown)

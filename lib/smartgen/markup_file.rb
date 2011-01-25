@@ -3,21 +3,19 @@ require 'active_support/core_ext/object/blank'
 
 module Smartgen
   class MarkupFile
-    attr_accessor :path, :filename, :extension, :engine
+    attr_accessor :path, :filename, :extension, :engine, :contents
     
     def initialize(path)
       @path = path
       @extension = File.extname(path)
       @filename = File.basename(path, @extension)
       @engine = engine_for(@extension) || self.class.engines.first
+      
+      @contents = engine.process(raw_contents)
     end
     
     def raw_contents
       File.read(path)
-    end
-    
-    def contents
-      engine.process(raw_contents)
     end
     
     class << self
