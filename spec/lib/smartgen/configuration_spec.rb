@@ -11,8 +11,8 @@ describe Smartgen::Configuration do
       subject.src_files.should be_empty
     end
     
-    it "should initialize output folder to 'tmp'" do
-      subject.output_folder.should == 'tmp'
+    it "should initialize output folder to nil" do
+      subject.output_folder.should be_nil
     end
     
     it "should initialize layout to nil" do
@@ -23,8 +23,8 @@ describe Smartgen::Configuration do
       subject.assets.should be_an_empty_array
     end
     
-    it "should initialize metadata_file to 'metadata.yml'" do
-      subject.metadata_file.should == 'metadata.yml'
+    it "should initialize metadata_file to nil" do
+      subject.metadata_file.should be_nil
     end
   end
 end

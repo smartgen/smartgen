@@ -8,10 +8,10 @@ module Smartgen
     
     def initialize
       @src_files = []
-      @output_folder = 'tmp'
+      @output_folder = nil
       @layout = nil
       @assets = []
-      @metadata_file = 'metadata.yml'
+      @metadata_file = nil
     end
   end
 end
