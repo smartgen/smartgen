@@ -2,6 +2,7 @@ New version
 -----------
 
 * Fixed README to explain that only directories may be specified in assets config
+* Added support for a table of contents of every generated page
 
 0.1.2
 -----
