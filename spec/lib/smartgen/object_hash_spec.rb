@@ -14,7 +14,17 @@ describe Smartgen::ObjectHash do
       should respond_to(key)
     end
   end
-  
+
+  describe "inexistent key" do
+    it "should not respond to" do
+      subject.should_not respond_to("invalid_key")
+    end
+
+    it "should return an empty ObjectHash" do
+      subject.invalid_key.should be_an_instance_of(Smartgen::ObjectHash)
+    end
+  end
+
   it "should respond to ancestor methods" do
     ancestor = Smartgen::ObjectHash.ancestors.first
     ancestor.instance_methods.each do |method|

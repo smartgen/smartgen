@@ -15,7 +15,8 @@ module Smartgen
         if has_key?(name)
           self[name]
         else
-          super
+          puts "warning: key #{name} not found on #{inspect}"
+          Smartgen::ObjectHash.new
         end
       end
       
