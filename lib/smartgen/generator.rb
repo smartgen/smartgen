@@ -1,16 +1,29 @@
 require 'thor/group'
 
 module Smartgen
+  # Generates files, possibly using layout and copying assets.
   class Generator < Thor::Group
     include Thor::Actions
     
+    desc "An array with all the source files that should be generated. See Configuration#src_files"
     argument :src_files, :type => :array
+    
+    desc "The output folder, where all generated files will be located. See Configuration#output_folder"
     argument :output_folder, :type => :string
     
+    desc "An optional layout file to be used when rendering each page. See Configuration#layout"
     class_option :layout, :type => :string
+    
+    desc "An array of dirs to be copied to output folder. See Configuration#assets"
     class_option :assets, :type => :array, :default => []
+    
+    desc "A YAML metadata file used to specify metadata used in all pages, or even specific page metadata. See Configuration#metadata_file"
     class_option :metadata_file, :type => :string
+    
+    desc "Whether indexer should be used or not. See Configuration#use_indexer"
     class_option :use_indexer, :type => :boolean, :default => false
+    
+    desc "Whether indexer should add numbered indexes on header tags. See Configuration#numbered_index"
     class_option :numbered_index, :type => :boolean, :default => false
     
     def create_output_folder
@@ -32,10 +45,12 @@ module Smartgen
     end
     
     class << self
+      # Returns the current renderer.
       def renderer
         @renderer ||= Smartgen::Renderer::ERB.new
       end
       
+      # Sets the renderer used when generating files.
       def renderer=(value)
         @renderer = value
       end

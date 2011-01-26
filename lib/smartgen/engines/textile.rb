@@ -2,6 +2,7 @@ require 'RedCloth'
 
 module Smartgen
   module Engine
+    # Processes textile files, supporting '.textile' extension.
     class Textile < Base
       protected
         def parse(body)

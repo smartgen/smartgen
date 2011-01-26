@@ -1,6 +1,12 @@
 require 'active_support/core_ext/hash'
 
 module Smartgen
+  # A hash that has method accessors for each key.
+  #
+  # For example:
+  #   hash = ObjectHash.new({:foo => 'bar'})
+  #   puts hash.foo     # outputs 'bar'
+  #
   class ObjectHash < HashWithIndifferentAccess
     def dup
       Smartgen::ObjectHash.new(self)
@@ -33,7 +39,7 @@ module Smartgen
   end
 end
 
-class Hash
+class Hash # :nodoc: all
   def with_object_hash
     hash = Smartgen::ObjectHash.new(self)
     hash.default = self.default

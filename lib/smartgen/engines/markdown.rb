@@ -2,6 +2,7 @@ require 'bluecloth'
 
 module Smartgen
   module Engine
+    # Processes markdown files, supporting both '.md' and '.markdown' extensions.
     class Markdown < Base
       protected
         def parse(body)

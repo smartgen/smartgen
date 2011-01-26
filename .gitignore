@@ -1,5 +1,6 @@
 pkg/*
 *.gem
 .bundle
-spec/sandbox/**/*
 .rvmrc
+doc
+spec/sandbox/**/*
