@@ -30,5 +30,9 @@ describe Smartgen::Configuration do
     it "should initialize use_indexer to false" do
       subject.use_indexer.should be_false
     end
+
+    it "should initialize numbered_index to false" do
+      subject.numbered_index.should be_false
+    end
   end
 end

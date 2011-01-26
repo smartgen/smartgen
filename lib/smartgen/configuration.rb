@@ -6,6 +6,7 @@ module Smartgen
     attr_accessor :assets
     attr_accessor :metadata_file
     attr_accessor :use_indexer
+    attr_accessor :numbered_index
     
     def initialize
       @src_files = []
@@ -14,6 +15,7 @@ module Smartgen
       @assets = []
       @metadata_file = nil
       @use_indexer = false
+      @numbered_index = false
     end
   end
 end
