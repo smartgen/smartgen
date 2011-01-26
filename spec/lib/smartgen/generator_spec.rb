@@ -85,6 +85,17 @@ describe Smartgen::Generator do
       end
     end
     
+    describe "inexistent file" do
+      def src_files
+        [fixture('src/common/inexistent_file.textile')]
+      end
+
+      it "should not generate html" do
+        subject.invoke_all
+        File.should_not be_file(output_folder_file("inexistent_file.html"))
+      end
+    end
+
     describe "with layout" do
       def src_files
         [fixture('src/with_layout/index.textile')]
