@@ -15,13 +15,10 @@ module Smartgen
     
     private
       def parse
-        html_doc = Nokogiri::HTML(@result)
-        tags = html_doc.xpath('//h1|//h2|//h3|//h4|//h5|//h6')
-        
         current_level = 0
         parent = nil
-        tags.each do |h_tag|
-          replace_h_tag(h_tag)
+
+        Nokogiri::HTML(@result).xpath('//h1|//h2|//h3|//h4|//h5|//h6').each do |h_tag|
           tag_level = tag_level_for(h_tag)
 
           if tag_level < current_level
@@ -30,7 +27,11 @@ module Smartgen
             parent = parent[:parent]
           end
           
-          parent = add_to(parent, h_tag, tag_level)
+          title = h_tag.inner_html
+          
+          update_h_tag(h_tag, parent)
+          parent = add_to(parent, title, tag_level)
+          
           current_level = tag_level
         end
         
@@ -41,8 +42,8 @@ module Smartgen
         h_tag.name.sub('h', '').to_i
       end
       
-      def add_to(parent, h_tag, tag_level)
-        index_hash(parent, h_tag, tag_level).tap do |child|
+      def add_to(parent, title, tag_level)
+        index_hash(parent, title, tag_level).tap do |child|
           if parent.nil? # add to index
             index << child
           else
@@ -51,8 +52,34 @@ module Smartgen
         end
       end
       
-      def index_hash(parent, h_tag, tag_level)
-        { :text => h_tag.inner_html, :id => h_tag['id'], :level => tag_level, :parent => parent, :children => [] }
+      def index_hash(parent, title, tag_level)
+        return {
+          :text => title,
+          :id => title_to_idx(title),
+          :level => tag_level,
+          :parent => parent,
+          :children => []
+        }.merge(numbered_index_data(parent))
+      end
+      
+      def numbered_index_data(parent)
+        if numbered_index?
+          { :numbered_index => numbered_index_for(parent) }
+        else
+          {}
+        end
+      end
+      
+      def numbered_index_for(parent)
+        if parent.nil?
+          "#{index.size + 1}"
+        else
+          "#{parent[:numbered_index]}.#{parent[:children].size + 1}"
+        end
+      end
+      
+      def numbered_index?
+        @options[:numbered_index].present?
       end
       
       def parent_with_level(level, current_parent)
@@ -70,9 +97,10 @@ module Smartgen
         end
       end
     
-      def replace_h_tag(h_tag)
+      def update_h_tag(h_tag, parent)
         snippet = h_tag.to_html
-        h_tag['id'] ||= title_to_idx(h_tag.text)
+        h_tag['id'] ||= title_to_idx(h_tag.inner_html)
+        h_tag.inner_html = "#{numbered_index_for(parent)} #{h_tag.inner_html}" if numbered_index?
         @result.sub!(snippet, h_tag.to_html)
       end
     

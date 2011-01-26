@@ -161,7 +161,7 @@ describe Smartgen::Generator do
     
     describe "with indexer" do
       def src_files
-        [fixture('src/indexer/index_without_ids.textile')]
+        [fixture('src/indexer/index_with_indexer.textile')]
       end
       
       def options
@@ -173,6 +173,24 @@ describe Smartgen::Generator do
 
         actual_src_filenames.each do |src_filename, src_ext|
           read_output("#{src_filename}.html").should == read_fixture("expectations/indexer/#{src_filename}.html")
+        end
+      end
+      
+      context "and numbered_index" do
+        def src_files
+          [fixture('src/indexer/index_with_indexer_and_numbered_index.textile')]
+        end
+        
+        def options
+          { :use_indexer => true, :numbered_index => true }
+        end
+
+        it "should add numbered indexes on each <h> tag" do
+          capture(:stdout) { subject.invoke_all }
+          
+          actual_src_filenames.each do |src_filename, src_ext|
+            read_output("#{src_filename}.html").should == read_fixture("expectations/indexer/#{src_filename}.html")
+          end
         end
       end
     end

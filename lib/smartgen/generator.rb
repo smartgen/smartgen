@@ -11,6 +11,7 @@ module Smartgen
     class_option :assets, :type => :array, :default => []
     class_option :metadata_file, :type => :string
     class_option :use_indexer, :type => :boolean, :default => false
+    class_option :numbered_index, :type => :boolean, :default => false
     
     def create_output_folder
       destination_root = output_folder
@@ -93,7 +94,11 @@ module Smartgen
       end
       
       def markup_file_options
-        { :indexer => options[:use_indexer] }
+        if options[:numbered_index]
+          { :indexer => { :numbered_index => true } }
+        else
+          { :indexer => options[:use_indexer] }
+        end
       end
       
       def supported?(extension)
