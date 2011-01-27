@@ -1,8 +1,10 @@
-New version
------------
+0.2.0
+-----
 
 * Fixed README to explain that only directories may be specified in assets config
 * Added support for a table of contents of every generated page
+* ObjectHash will output a warning instead of raising error when a missing key accessor method is called.
+* Added documentation for classes and some improvements in README
 
 0.1.3
 -----
