@@ -130,3 +130,14 @@ You may also use a rake task:
     end
 
 The yielded config is exactly the same config yielded by Smartgen::Resource#configure method, so you can use any of the above configs.
+
+## Contributors
+
+* [Vicente Mundim](http://github.com/vicentemundim) _author_
+* [Emerson Leite](http://github.com/emerleite)
+* [Rodrigo Lopes](http://github.com/rodvlopes)
+* [Marcos Silva Pereira](http://github.com/marcospereira)
+
+## Copyright
+
+Copyright (c) 2011 Vicente Mundim. See LICENSE for details.
