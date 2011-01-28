@@ -2,6 +2,7 @@
 require File.expand_path(File.join('smartgen', 'object_hash'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'resource'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'configuration'), File.dirname(__FILE__))
+require File.expand_path(File.join('smartgen', 'watcher'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'indexer'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'markup_file'), File.dirname(__FILE__))
 require File.expand_path(File.join('smartgen', 'renderers'), File.dirname(__FILE__))

@@ -1,3 +1,8 @@
+0.3.0
+-----
+
+* Added a rake task that regenerates files as they are added, changed or deleted
+
 0.2.0
 -----
 

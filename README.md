@@ -131,6 +131,36 @@ You may also use a rake task:
 
 The yielded config is exactly the same config yielded by Smartgen::Resource#configure method, so you can use any of the above configs.
 
+## Watching for changes
+
+When you are writing documentation it can be boring to always have to regenerate files manually every time you make some changes. Smartgen provides you with a way of regenerate files once they are saved. Just use `Smartgen::WatcherRakeTask`:
+
+    require 'smartgen/watcher_rake_task'
+    
+    Smartgen::WatcherRakeTask.new :my_doc do |config|
+      config.src_files = ['doc/**/*']
+      config.output_folder = 'public/docs'
+    end
+
+When you run this rake task it will generate files based on this configuration and start watching for changes. Whenever you create, modify or delete a file, it will regenerate all files for you, just reload your browser!
+
+If you want to have the ability to generate files instantly and also have a watcher you can do this:
+
+    require 'smartgen/rake_task'
+    require 'smartgen/watcher_rake_task'
+    
+    Smartgen::RakeTask.new :my_doc do |config|
+      config.src_files = ['doc/**/*']
+      config.output_folder = 'public/docs'
+    end
+    
+    Smartgen::WatcherRakeTask.new :watch_my_doc, :my_doc
+
+Then you can call both `my_doc` and `watch_my_doc`:
+
+    rake my_doc          # generates files right away
+    rake watch_my_doc    # generates files and watch for changes
+
 ## Contributors
 
 * [Vicente Mundim](http://github.com/vicentemundim) _(author)_

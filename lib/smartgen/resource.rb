@@ -16,7 +16,7 @@ module Smartgen
     
     # Yields a Configuration, so that you can configure the generation of files.
     def configure
-      yield config
+      yield config if block_given?
     end
   
     # Returns the Configuration for this resource.
