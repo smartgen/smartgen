@@ -108,7 +108,7 @@ You may create as many resource configurations as you want. When you call `Smart
       config.layout = 'doc/layout.html.erb'
       config.metadata_file = 'doc/metadata.yml'
     end
-    
+
     Smartgen[:some_other_documentation].configure do |config|
       config.src_files = ['other_doc/**/*']
       config.output_folder = 'public/other_docs'
@@ -123,7 +123,7 @@ You may create as many resource configurations as you want. When you call `Smart
 You may also use a rake task:
 
     require 'smartgen/rake_task'
-    
+
     Smartgen::RakeTask.new :my_doc do |config|
       config.src_files = ['doc/**/*']
       config.output_folder = 'public/docs'
@@ -167,6 +167,7 @@ Then you can call both `my_doc` and `watch_my_doc`:
 * [Emerson Leite](http://github.com/emerleite)
 * [Rodrigo Lopes](http://github.com/rodvlopes)
 * [Marcos Silva Pereira](http://github.com/marcospereira)
+* [Wandenberg Peixoto](http://github.com/wandenberg)
 
 ## Copyright
 
