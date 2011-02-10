@@ -4,3 +4,4 @@ pkg/*
 .rvmrc
 doc
 spec/sandbox/**/*
+.project
