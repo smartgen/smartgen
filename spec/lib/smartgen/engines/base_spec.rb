@@ -2,11 +2,6 @@ require 'spec_helper'
 
 describe Smartgen::Engine::Base do
   describe "processing" do
-    it "should just return body" do
-      body = 'body'
-      subject.process(body).should == body
-    end
-
     describe "pre processing" do
       before do
         Smartgen::Engine::Base.pre_processors = []
