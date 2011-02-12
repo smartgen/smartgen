@@ -87,9 +87,9 @@ module Smartgen
 
       def load_metadata
         if options["metadata_file"]
-          YAML.load(File.read(options["metadata_file"]))
+          Smartgen::ObjectHash.new(YAML.load(File.read(options["metadata_file"])))
         else
-          {}
+          Smartgen::ObjectHash.new
         end
       end
 

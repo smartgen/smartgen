@@ -4,6 +4,7 @@
 * Added a sample Thorfile and fixed thor generator description so that it can be properly used.
 * Configuration options are passed directly to generators to avoid duplicate options definitions
 * Allowing one to pass a different resource name for rake task
+* Metadata will be passed as an ObjectHash to renderers and engines
 
 0.4.0
 -----

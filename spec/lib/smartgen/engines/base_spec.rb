@@ -21,7 +21,7 @@ describe Smartgen::Engine::Base do
 
       context "with pre processors" do
         class PreProcessor
-          def process(body, metadata={}) # just needs to respond_to?(:process)
+          def process(body, metadata=Smartgen::ObjectHash.new) # just needs to respond_to?(:process)
             "<pre_processed>#{body}#{metadata[:name]}</pre_processed>"
           end
         end
@@ -37,7 +37,7 @@ describe Smartgen::Engine::Base do
           Smartgen::Engine::Base.register(PreProcessor.new)
 
           body = 'body'
-          subject.process(body, {:name => " John"}).should == "<pre_processed>body John</pre_processed>"
+          subject.process(body, Smartgen::ObjectHash.new({:name => " John"})).should == "<pre_processed>body John</pre_processed>"
         end
 
         it "should do run pre processors in the order they were registered" do

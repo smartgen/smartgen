@@ -14,7 +14,7 @@ module Smartgen
       end
 
       # Process a file, calling each pre processor if any.
-      def process(body, metadata={})
+      def process(body, metadata=Smartgen::ObjectHash.new)
         parse(pre_process(body, metadata))
       end
 
