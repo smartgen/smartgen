@@ -15,7 +15,7 @@ module Smartgen
 
       # Process a file, calling each pre processor if any.
       def process(body, metadata=Smartgen::ObjectHash.new)
-        parse(pre_process(body, metadata))
+        parse(pre_process(body, metadata), metadata)
       end
 
       # Returns true if the given extension is supported by this engine.
@@ -39,7 +39,7 @@ module Smartgen
           end
         end
 
-        def parse(body)
+        def parse(body, metadata)
           body
         end
 

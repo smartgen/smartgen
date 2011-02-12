@@ -5,7 +5,7 @@ module Smartgen
     # Processes textile files, supporting '.textile' extension.
     class Textile < Base
       protected
-        def parse(body)
+        def parse(body, metadata)
           RedCloth.new(body).to_html
         end
 

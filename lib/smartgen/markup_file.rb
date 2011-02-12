@@ -40,7 +40,7 @@ module Smartgen
     def initialize(path, options={})
       @path = path
       @extension = File.extname(path)
-      @filename = File.basename(path, @extension)
+      @filename = filename_for(path)
       @engine = engine_for(@extension) || self.class.engines.first
 
       @contents = engine.process(raw_contents, options[:metadata])
@@ -64,7 +64,7 @@ module Smartgen
       # first ones are the ones with higher priority.
       def engines
         if @engines.blank?
-          @engines = [Smartgen::Engine::Textile.new, Smartgen::Engine::Markdown.new]
+          @engines = [Smartgen::Engine::Textile.new, Smartgen::Engine::Markdown.new, Smartgen::Engine::ERB.new]
         end
 
         @engines
@@ -86,6 +86,10 @@ module Smartgen
         end
 
         nil
+      end
+
+      def filename_for(path)
+        File.basename(File.basename(path, @extension), '.html')
       end
   end
 end

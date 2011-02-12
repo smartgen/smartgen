@@ -108,7 +108,7 @@ module Smartgen
       end
 
       def markup_files
-        Dir[*src_files].select { |f| supported?(File.extname(f)) }.map do |markup_filename|
+        supported_src_files.map do |markup_filename|
           MarkupFile.new markup_filename, markup_file_options
         end
       end
@@ -121,8 +121,18 @@ module Smartgen
         end
       end
 
+      def supported_src_files
+        Dir[*src_files].select do |path|
+          supported?(File.extname(path)) && !layout?(path)
+        end
+      end
+
       def supported?(extension)
         MarkupFile.engines.one? { |engine| engine.supported?(extension) }
+      end
+
+      def layout?(file)
+        File.expand_path(options[:layout]) == File.expand_path(file) if has_layout?
       end
 
       def output_folder_path(path)

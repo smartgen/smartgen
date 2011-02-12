@@ -1,6 +1,7 @@
 0.5.0
 -----
 
+* Added ERB engine
 * Added a sample Thorfile and fixed thor generator description so that it can be properly used.
 * Configuration options are passed directly to generators to avoid duplicate options definitions
 * Allowing one to pass a different resource name for rake task

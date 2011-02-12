@@ -55,6 +55,16 @@ describe Smartgen::MarkupFile do
       subject.filename.should == File.basename(path, File.extname(path))
     end
 
+    context "when filename ends with .html" do
+      def path
+        fixture('src/erb/index.html.erb')
+      end
+
+      it "should not have .html in filename" do
+        subject.filename.should == File.basename(path, ".html#{File.extname(path)}")
+      end
+    end
+
     it "should have an extension" do
       subject.extension.should == File.extname(path)
     end
@@ -107,8 +117,8 @@ describe Smartgen::MarkupFile do
       end
     end
 
-    context "using markdown template" do
-      it "should use textile as markup engine for files with .markdown" do
+    context "using markdown engine" do
+      it "should use markdown as markup engine for files with .markdown" do
         def path
           fixture('src/common/other_index.markdown')
         end
@@ -116,12 +126,22 @@ describe Smartgen::MarkupFile do
         subject.engine.should be_an_instance_of(Smartgen::Engine::Markdown)
       end
 
-      it "should use textile as markup engine for files with .md" do
+      it "should use markdown as markup engine for files with .md" do
         def path
           fixture('src/common/another_index.md')
         end
 
         subject.engine.should be_an_instance_of(Smartgen::Engine::Markdown)
+      end
+    end
+
+    context "using erb engine" do
+      it "should use markdown as markup engine for files with .md" do
+        def path
+          fixture('src/erb/index.html.erb')
+        end
+
+        subject.engine.should be_an_instance_of(Smartgen::Engine::ERB)
       end
     end
   end

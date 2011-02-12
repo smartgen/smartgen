@@ -96,6 +96,52 @@ describe Smartgen::Generator do
       end
     end
 
+    describe "with ERB files" do
+      def src_files
+        [fixture('src/erb/index.html.erb')]
+      end
+
+      it "should generate index file" do
+        capture(:stdout) { subject.invoke_all }
+        read_output("index.html").should == read_fixture("expectations/erb/index.html")
+      end
+
+      describe "with layout" do
+        def src_files
+          [fixture('src/erb/with_layout/index.html.erb')]
+        end
+
+        def options
+          { :layout => fixture('src/layout.html.erb') }
+        end
+
+        it "should use the layout when generating" do
+          capture(:stdout) { subject.invoke_all }
+          read_output("index.html").should == read_fixture("expectations/erb/with_layout/index.html")
+        end
+
+        context "inside the src_files pattern" do
+          def src_files
+            [fixture('src/erb/with_layout/**/*')]
+          end
+
+          def options
+            { :layout => fixture('src/erb/with_layout/layout.html.erb') }
+          end
+
+          it "should use the layout when generating" do
+            capture(:stdout) { subject.invoke_all }
+            read_output("index.html").should == read_fixture("expectations/erb/with_layout/index.html")
+          end
+
+          it "should not attempt to render layout using ERB engine" do
+            capture(:stdout) { subject.invoke_all }
+            read_output("index.html").should == read_fixture("expectations/erb/with_layout/index.html")
+          end
+        end
+      end
+    end
+
     describe "with layout" do
       def src_files
         [fixture('src/with_layout/index.textile')]
