@@ -1,0 +1,1 @@
+load(File.expand_path('lib/smartgen.rb', File.dirname(__FILE__)))

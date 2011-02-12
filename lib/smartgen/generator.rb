@@ -5,26 +5,28 @@ module Smartgen
   class Generator < Thor::Group
     include Thor::Actions
 
-    desc "An array with all the source files that should be generated. See Configuration#src_files"
-    argument :src_files, :type => :array
+    desc "Process given markup files, generating HTML, optionally using a layout and copying assets."
 
-    desc "The output folder, where all generated files will be located. See Configuration#output_folder"
-    argument :output_folder, :type => :string
+    argument :src_files, :type => :array,
+             :desc => "An array with all the source files that should be generated."
 
-    desc "An optional layout file to be used when rendering each page. See Configuration#layout"
-    class_option :layout, :type => :string
+    argument :output_folder, :type => :string,
+             :desc => "The output folder, where all generated files will be located."
 
-    desc "An array of dirs to be copied to output folder. See Configuration#assets"
-    class_option :assets, :type => :array, :default => []
+    class_option :layout, :type => :string,
+                 :desc => "An optional layout file to be used when rendering each page."
 
-    desc "A YAML metadata file used to specify metadata used in all pages, or even specific page metadata. See Configuration#metadata_file"
-    class_option :metadata_file, :type => :string
+    class_option :assets, :type => :array, :default => [],
+                 :desc => "An array of dirs to be copied to output folder."
 
-    desc "Whether indexer should be used or not. See Configuration#use_indexer"
-    class_option :use_indexer, :type => :boolean, :default => false
+    class_option :metadata_file, :type => :string,
+                 :desc => "A YAML metadata file used to specify metadata used in all pages, or even specific page metadata."
 
-    desc "Whether indexer should add numbered indexes on header tags. See Configuration#numbered_index"
-    class_option :numbered_index, :type => :boolean, :default => false
+    class_option :use_indexer, :type => :boolean, :default => false,
+                 :desc => "Whether indexer should be used or not."
+
+    class_option :numbered_index, :type => :boolean, :default => false,
+                 :desc => "Whether indexer should add numbered indexes on header tags."
 
     def create_output_folder
       destination_root = output_folder
