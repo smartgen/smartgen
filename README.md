@@ -161,6 +161,13 @@ Then you can call both `my_doc` and `watch_my_doc`:
     rake my_doc          # generates files right away
     rake watch_my_doc    # generates files and watch for changes
 
+## Related Gems
+
+* [Smartgen SyntaxHighlighter](http://github.com/smartgen/smartgen_syntaxhighlighter) -- Adds support to use Alex Gorbatchev's Syntax Highlighter plugin with smartgen
+* [Smartgen ERB](http://github.com/smartgen/smartgen_erb) -- A ERB preprocessor for smartgen engines
+
+There are some
+
 ## Contributors
 
 * [Vicente Mundim](http://github.com/vicentemundim) _(author)_
