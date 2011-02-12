@@ -11,21 +11,31 @@ module Smartgen
     def dup
       Smartgen::ObjectHash.new(self)
     end
-    
+
     def respond_to?(method)
-      has_key?(method) or super
+      has_key?(method) || (setter?(method) && has_key?(method.to_s.chop)) || super
     end
-    
+
+    def inspect
+      "ObjectHash(#{super})"
+    end
+
     protected
       def method_missing(name, *args)
         if has_key?(name)
           self[name]
+        elsif setter?(name)
+          self[name.to_s.chop] = args.first
         else
           puts "warning: key #{name} not found on #{inspect}"
           Smartgen::ObjectHash.new
         end
       end
-      
+
+      def setter?(method)
+        method.to_s.end_with?('=')
+      end
+
       def convert_value(value)
         case value
         when Hash

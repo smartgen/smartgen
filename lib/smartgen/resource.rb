@@ -31,19 +31,11 @@ module Smartgen
     
     private
       def generator
-        Smartgen::Generator.new(arguments, options)
+        Smartgen::Generator.new(arguments, config)
       end
       
       def arguments
         [config.src_files, config.output_folder]
-      end
-      
-      def options
-        {
-          :metadata_file => config.metadata_file,
-          :layout => config.layout,
-          :assets => config.assets
-        }
       end
   end
 end
