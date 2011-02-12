@@ -27,7 +27,7 @@ module Smartgen
         elsif setter?(name)
           self[name.to_s.chop] = args.first
         else
-          puts "warning: key #{name} not found on #{inspect}"
+          $stderr.puts "warning: key #{name} not found on #{inspect}"
           Smartgen::ObjectHash.new
         end
       end

@@ -29,11 +29,15 @@ describe Smartgen::ObjectHash do
 
   describe "inexistent key" do
     it "should not respond to" do
-      subject.should_not respond_to("invalid_key")
+      capture(:stderr) { subject.should_not respond_to("invalid_key") }
     end
 
     it "should return an empty ObjectHash" do
-      subject.invalid_key.should be_an_instance_of(Smartgen::ObjectHash)
+      capture(:stderr) { subject.invalid_key.should be_an_instance_of(Smartgen::ObjectHash) }
+    end
+
+    it "should print a warn" do
+      capture(:stderr) { subject.invalid_key }.should == "warning: key invalid_key not found on #{subject.inspect}\n"
     end
   end
 
