@@ -38,7 +38,7 @@ describe Smartgen::Resource do
 
     context "with default options" do
       let :expected_options do
-        ObjectHash.new
+        Smartgen::ObjectHash.new
       end
 
       it_should_behave_like "generation with configuration"
@@ -58,7 +58,7 @@ describe Smartgen::Resource do
       end
 
       let :expected_options do
-        ObjectHash.new({
+        Smartgen::ObjectHash.new({
           :layout => subject.config.layout,
           :assets => subject.config.assets,
           :metadata_file => subject.config.metadata_file,
