@@ -91,7 +91,7 @@ describe Smartgen::Generator do
       end
 
       it "should not generate html" do
-        subject.invoke_all
+        capture(:stdout) { subject.invoke_all }
         File.should_not be_file(output_folder_file("inexistent_file.html"))
       end
     end
