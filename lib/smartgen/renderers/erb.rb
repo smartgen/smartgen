@@ -8,8 +8,7 @@ module Smartgen
       def render(layout, markup_file, metadata={})
         metadata = Smartgen::ObjectHash.new(metadata)
 
-        template = ::ERB.new(layout)
-        template.result(binding)
+        ::ERB.new(layout).result(binding)
       end
     end
   end
