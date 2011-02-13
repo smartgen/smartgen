@@ -5,7 +5,7 @@ module Smartgen
       # Renders the markup file using the given layout.
       #
       # It exposes +markup_file+ variable and its +metadata+ to the ERB layout.
-      def render(layout, markup_file, metadata={})
+      def render(layout, markup_file, metadata=Smartgen::ObjectHash.new)
         ::ERB.new(layout).result(binding)
       end
     end

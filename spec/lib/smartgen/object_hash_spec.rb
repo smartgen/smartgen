@@ -26,7 +26,7 @@ describe Smartgen::ObjectHash do
       should respond_to(key)
     end
   end
-
+  
   describe "inexistent key" do
     it "should not respond to" do
       capture(:stderr) { subject.should_not respond_to("invalid_key") }
