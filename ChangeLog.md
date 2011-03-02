@@ -1,3 +1,9 @@
+0.5.1
+-----
+
+* Smartgen::ObjectHash is used as default value for metadata parameter when rendering files
+* Forcing exit when user press CTRL+C when Watcher is running.
+
 0.5.0
 -----
 

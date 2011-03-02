@@ -63,6 +63,7 @@ describe Smartgen::Watcher do
     context "when user hits ctrl+c" do
       it "should exit gracefully" do
         directory_watcher.should_receive(:stop)
+        Kernel.should_receive(:exit).with(0)
         Kernel.should_receive(:trap).with('INT').and_yield
         capture(:stdout) { subject.start }
       end

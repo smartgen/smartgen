@@ -69,6 +69,7 @@ module Smartgen
         Kernel.trap 'INT' do
           puts "Stopping watcher..."
           directory_watcher.stop
+          Kernel.exit 0
         end
       end
   end
