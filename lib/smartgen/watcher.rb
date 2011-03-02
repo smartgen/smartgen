@@ -68,7 +68,6 @@ module Smartgen
       def setup_graceful_exit
         Kernel.trap 'INT' do
           puts "Stopping watcher..."
-          directory_watcher.stop
           Kernel.exit 0
         end
       end

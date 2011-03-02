@@ -1,4 +1,4 @@
-0.5.1
+0.5.2
 -----
 
 * Smartgen::ObjectHash is used as default value for metadata parameter when rendering files
