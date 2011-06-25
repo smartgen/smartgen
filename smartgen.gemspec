@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency "thor", ">= 0.14.6"
   s.add_dependency "i18n", ">= 0.5.0"
   s.add_dependency "activesupport", ">= 2.3.5"
-  s.add_dependency "RedCloth", "= 4.2.3"
+  s.add_dependency "RedCloth", ">= 4.2.7"
   s.add_dependency "bluecloth", ">= 2.0.9"
   s.add_dependency "nokogiri", ">= 1.4.4"
   s.add_dependency "directory_watcher", ">= 1.3.2"
