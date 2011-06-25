@@ -49,6 +49,25 @@ describe Smartgen::Engine::Base do
           subject.process(body).should == "<another>#{body}</another>"
         end
 
+        context "when pre processor has engine setter" do
+          class PreProcessor
+            attr_accessor :engine
+          end
+
+          it "should set engine on pre processor after initializing the engine" do
+            pre_processor = PreProcessor.new
+            Smartgen::Engine::Base.register(pre_processor)
+            subject
+            pre_processor.engine.should == subject
+          end
+        end
+
+        context "when forcing processing without pre processors" do
+          it "should return just body" do
+            subject.process_without_pre_processors('some body').should == 'some body'
+          end
+        end
+
         context "of a subclass" do
           class OtherPreProcessor
             def process(body, metadata={})

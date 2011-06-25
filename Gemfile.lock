@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    smartgen (0.6.0.beta1)
+    smartgen (0.6.0.beta2)
       RedCloth (>= 4.2.7)
       activesupport (>= 2.3.5)
       bluecloth (>= 2.0.9)
