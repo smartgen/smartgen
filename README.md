@@ -1,5 +1,7 @@
-Smartgen
-========
+# Smartgen  [![alt build status][1]][2]
+
+[1]: https://secure.travis-ci.org/smartgen/smartgen.png
+[2]: http://travis-ci.org/#!/smartgen/smartgen
 
 Smartgen generates static HTML files from markup files, using textile or markdown and ERB to create layout templates.
 
