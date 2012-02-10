@@ -1,4 +1,4 @@
-require 'active_support/core_ext/class/inheritable_attributes'
+require 'active_support/core_ext/class/attribute'
 
 module Smartgen
   module Engine
@@ -7,7 +7,7 @@ module Smartgen
     # An engine process markup files, converting them to HTML.
     class Base
       # An array of pre processors that will process files before conversion.
-      class_inheritable_accessor :pre_processors
+      class_attribute :pre_processors
 
       def initialize
         self.pre_processors ||= []
@@ -31,10 +31,15 @@ module Smartgen
       end
 
       class << self
+        pre_processors = []
+
         # Registers a pre processor for this engine.
         def register(processor)
-          self.pre_processors ||= []
-          self.pre_processors << processor
+          self.pre_processors += [processor]
+        end
+
+        def inherited(base)
+          base.pre_processors = []
         end
       end
 

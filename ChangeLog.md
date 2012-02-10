@@ -1,3 +1,8 @@
+0.6.0
+-----
+
+* Raising ActiveSupport dependency to > 3.0.0
+
 0.5.2
 -----
 
