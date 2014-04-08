@@ -44,7 +44,7 @@ describe Smartgen::ObjectHash do
   it "should respond to ancestor methods" do
     ancestor = Smartgen::ObjectHash.ancestors.first
     ancestor.instance_methods.each do |method|
-      should respond_to(method)
+      subject.respond_to?(method, true).should be_true
     end
   end
 

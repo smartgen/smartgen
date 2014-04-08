@@ -12,7 +12,7 @@ module Smartgen
       Smartgen::ObjectHash.new(self)
     end
 
-    def respond_to?(method)
+    def respond_to?(method, include_all = false)
       has_key?(method) || (setter?(method) && has_key?(method.to_s.chop)) || super
     end
 
