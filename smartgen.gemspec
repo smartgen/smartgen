@@ -27,4 +27,5 @@ Gem::Specification.new do |s|
   s.add_dependency "directory_watcher", ">= 1.3.2"
 
   s.add_development_dependency "rspec", ">= 2.3.0"
+  s.add_development_dependency "debugger"
 end
