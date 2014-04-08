@@ -154,13 +154,13 @@ describe Smartgen::MarkupFile do
     end
 
     it "should use indexer" do
-      mock_indexer = mock(Smartgen::Indexer, :result => 'result')
+      mock_indexer = double(Smartgen::Indexer, :result => 'result')
       Smartgen::Indexer.should_receive(:new).and_return(mock_indexer)
       subject
     end
 
     it "should return indexer result as contents" do
-      mock_indexer = mock(Smartgen::Indexer, :result => 'result')
+      mock_indexer = double(Smartgen::Indexer, :result => 'result')
       Smartgen::Indexer.should_receive(:new).and_return(mock_indexer)
       subject.contents.should == 'result'
     end

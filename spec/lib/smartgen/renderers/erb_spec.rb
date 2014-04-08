@@ -6,7 +6,7 @@ describe Smartgen::Renderer::ERB do
   end
   
   def markup_file
-    @markup_file ||= mock(Smartgen::MarkupFile, :contents => contents)
+    @markup_file ||= double(Smartgen::MarkupFile, :contents => contents)
   end
   
   it "should render the given layout with markup_file variable" do

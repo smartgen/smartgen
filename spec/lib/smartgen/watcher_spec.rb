@@ -15,14 +15,14 @@ describe Smartgen::Watcher do
     def directory_watcher
       return @directory_watcher if @directory_watcher
       
-      @directory_watcher = mock(DirectoryWatcher, :add_observer => 'observer', :interval= => '2')
-      @directory_watcher.stub!(:start).and_return(@directory_watcher)
-      @directory_watcher.stub!(:join).and_return(@directory_watcher)
+      @directory_watcher = double(DirectoryWatcher, :add_observer => 'observer', :interval= => '2')
+      @directory_watcher.stub(:start).and_return(@directory_watcher)
+      @directory_watcher.stub(:join).and_return(@directory_watcher)
       @directory_watcher
     end
     
     before do
-      DirectoryWatcher.stub!(:new).and_return(directory_watcher)
+      DirectoryWatcher.stub(:new).and_return(directory_watcher)
     end
     
     subject do

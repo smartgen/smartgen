@@ -266,7 +266,7 @@ describe Smartgen::Generator do
       end
       
       Smartgen::Generator.renderer = MyRenderer.new
-      Smartgen::Generator.renderer.render('some_layout', mock(Smartgen::MarkupFile)).should == "do some rendering stuff"
+      Smartgen::Generator.renderer.render('some_layout', double(Smartgen::MarkupFile)).should == "do some rendering stuff"
     end
   end
 end

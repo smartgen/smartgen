@@ -25,7 +25,7 @@ describe Smartgen::Resource do
       end
 
       it "should generate files using the configuration" do
-        mock_generator = mock(Smartgen::Generator)
+        mock_generator = double(Smartgen::Generator)
         Smartgen::Generator.
                   should_receive(:new).
                   with(expected_arguments, expected_options).
