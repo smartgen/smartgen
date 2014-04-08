@@ -36,7 +36,7 @@ module Smartgen
         method.to_s.end_with?('=')
       end
 
-      def convert_value(value)
+      def convert_value(value, options = {})
         case value
         when Hash
           value.with_object_hash
